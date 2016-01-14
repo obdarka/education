@@ -8,7 +8,9 @@
 
 #import <XCTest/XCTest.h>
 
-@interface DKKitTests : XCTestCase
+@interface DKKitTests : XCTestCase {
+    id nullObject;
+}
 
 @end
 
@@ -16,24 +18,56 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    nullObject = [NSNull null];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)test_sendUnknownMessage {
+    XCTAssertNoThrow([nullObject loadView]);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)test_sendMessageWithNil {
+    XCTAssertNoThrow([nullObject view]);
+    XCTAssertNil([nullObject view]);
+}
+
+- (void)test_sendMessageWithPrimitive {
+    XCTAssertNoThrow([nullObject count]);
+    XCTAssertEqual([nullObject count], 0);
+}
+
+- (void)test_structReturnMessage {
+    XCTAssertNoThrow([nullObject frame]);
+    XCTAssertTrue(CGRectIsEmpty([nullObject frame]));
+}
+
+- (void)test_sendNullMethods {
+    XCTAssertNoThrow([nullObject class]);
+    XCTAssertNoThrow([nullObject description]);
+}
+
+- (void)test_beEqualToNSNull {
+    XCTAssertNoThrow([nullObject isEqual:[NSNull null]]);
+    XCTAssertTrue([nullObject isEqual:[NSNull null]]);
+}
+
+- (void)test_compareWithNil {
+    XCTAssertTrue([nullObject isEqual:nil]);
+}
+
+- (void)test_compareWithSelf {
+    XCTAssertTrue([nullObject isEqual:nullObject]);
+}
+
+- (void)test_compareWithOtherObject {
+    XCTAssertFalse([nullObject isEqual:[NSObject new]]);
+}
+
+- (void)test_hashForTwoObjects {
+    XCTAssertTrue([nullObject hash] == [[NSNull null] hash]);
 }
 
 @end

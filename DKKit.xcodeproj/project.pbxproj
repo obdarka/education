@@ -72,6 +72,8 @@
 			isa = PBXGroup;
 			children = (
 				C85552801C48451C009FD76D /* DKKit.h */,
+				C855529B1C4845A8009FD76D /* Categories */,
+				C855529D1C4845A8009FD76D /* DKClasses */,
 				C85552821C48451C009FD76D /* Info.plist */,
 			);
 			path = DKKit;
@@ -84,6 +86,36 @@
 				C855528E1C48451C009FD76D /* Info.plist */,
 			);
 			path = DKKitTests;
+			sourceTree = "<group>";
+		};
+		C855529B1C4845A8009FD76D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C855529C1C4845A8009FD76D /* NSNull+DKNull */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		C855529C1C4845A8009FD76D /* NSNull+DKNull */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "NSNull+DKNull";
+			sourceTree = "<group>";
+		};
+		C855529D1C4845A8009FD76D /* DKClasses */ = {
+			isa = PBXGroup;
+			children = (
+				C855529E1C4845A8009FD76D /* DKNull */,
+			);
+			path = DKClasses;
+			sourceTree = "<group>";
+		};
+		C855529E1C4845A8009FD76D /* DKNull */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DKNull;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
