@@ -10,6 +10,8 @@
 		C85552811C48451C009FD76D /* DKKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C85552801C48451C009FD76D /* DKKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C85552881C48451C009FD76D /* DKKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C855527D1C48451C009FD76D /* DKKit.framework */; };
 		C855528D1C48451C009FD76D /* DKKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C855528C1C48451C009FD76D /* DKKitTests.m */; };
+		C85552A11C484BE5009FD76D /* DKNull.h in Headers */ = {isa = PBXBuildFile; fileRef = C855529F1C484BE5009FD76D /* DKNull.h */; };
+		C85552A21C484BE5009FD76D /* DKNull.m in Sources */ = {isa = PBXBuildFile; fileRef = C85552A01C484BE5009FD76D /* DKNull.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		C85552871C48451C009FD76D /* DKKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C855528C1C48451C009FD76D /* DKKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DKKitTests.m; sourceTree = "<group>"; };
 		C855528E1C48451C009FD76D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C855529F1C484BE5009FD76D /* DKNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKNull.h; sourceTree = "<group>"; };
+		C85552A01C484BE5009FD76D /* DKNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKNull.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 		C855529E1C4845A8009FD76D /* DKNull */ = {
 			isa = PBXGroup;
 			children = (
+				C855529F1C484BE5009FD76D /* DKNull.h */,
+				C85552A01C484BE5009FD76D /* DKNull.m */,
 			);
 			path = DKNull;
 			sourceTree = "<group>";
@@ -125,6 +131,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C85552A11C484BE5009FD76D /* DKNull.h in Headers */,
 				C85552811C48451C009FD76D /* DKKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C85552A21C484BE5009FD76D /* DKNull.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

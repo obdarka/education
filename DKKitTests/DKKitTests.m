@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "DKNull.h"
 
 @interface DKKitTests : XCTestCase {
     id nullObject;
@@ -18,7 +19,7 @@
 
 - (void)setUp {
     [super setUp];
-    nullObject = [NSNull null];
+    nullObject = [DKNull new];
 }
 
 - (void)tearDown {
