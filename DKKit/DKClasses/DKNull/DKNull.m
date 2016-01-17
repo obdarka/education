@@ -10,29 +10,45 @@
 
 @implementation DKNull
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation {
-    NSMethodSignature *methodSignature = [NSNull methodSignatureForSelector:anInvocation.selector];
-    if (methodSignature) {
-        [super forwardInvocation:anInvocation];
-    } else {
-    anInvocation.target = nil;
-    [anInvocation invoke];
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation
+{
+    if ([[NSNull null] respondsToSelector:
+         [anInvocation selector]])
+        [anInvocation invokeWithTarget:[NSNull null]];
+    else {
+        anInvocation.target = nil;
+        [anInvocation invoke];
     }
 }
-+ (BOOL)resolveClassMethod:(SEL)sel {
-    return [NSNull resolveClassMethod:sel];
+
+- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
+{
+    NSMethodSignature* signature = [super methodSignatureForSelector:selector];
+    if (!signature) {
+        signature = [DKNull instanceMethodSignatureForSelector:@selector(fakeMethod)];
+    }
+    return signature;
 }
 
-+ (IMP)instanceMethodForSelector:(SEL)aSelector {
-    return [NSNull instanceMethodForSelector:aSelector];
+- (void)fakeMethod {
+    
 }
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
     return self;
 }
 
+- (BOOL)isEqual:(id)object {
+    if(!object)
+        return YES;
+    else if ([object isEqual:[NSNull null]])
+        return YES;
+    else
+        return [super isEqual:object];
+}
 
-+ (BOOL)resolveInstanceMethod:(SEL)sel {
-    return [NSNull resolveInstanceMethod:sel];
+- (NSUInteger)hash {
+    return [NSNull null].hash;
 }
 @end

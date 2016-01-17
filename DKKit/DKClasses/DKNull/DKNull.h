@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DKNull : NSNull
+@interface DKNull : NSObject
 
 @end
