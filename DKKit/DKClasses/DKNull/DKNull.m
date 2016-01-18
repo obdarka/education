@@ -8,11 +8,23 @@
 
 #import "DKNull.h"
 
+static DKNull *dkNullObject;
+
 @implementation DKNull
 
++ (instancetype)null {    
+    [self initNull];
+    return dkNullObject;
+}
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
++ (void)initNull {
+    static dispatch_once_t predicate;
+    dispatch_once( &predicate, ^{
+        dkNullObject = [[DKNull alloc] init];
+    } );
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
     if ([[NSNull null] respondsToSelector:
          [anInvocation selector]])
         [anInvocation invokeWithTarget:[NSNull null]];
@@ -22,8 +34,7 @@
     }
 }
 
-- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
-{
+- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
     NSMethodSignature* signature = [super methodSignatureForSelector:selector];
     if (!signature) {
         signature = [DKNull instanceMethodSignatureForSelector:@selector(fakeMethod)];

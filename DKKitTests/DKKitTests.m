@@ -1,4 +1,4 @@
-//
+	//
 //  DKKitTests.m
 //  DKKitTests
 //
@@ -8,7 +8,6 @@
 
 #import <XCTest/XCTest.h>
 #import "DKNull.h"
-
 @interface DKKitTests : XCTestCase {
     id nullObject;
 }
@@ -19,7 +18,13 @@
 
 - (void)setUp {
     [super setUp];
-    nullObject = [DKNull new];
+    nullObject = [NSNull null];
+//    nullObject = [DKNull new];
+//    NSError *error = nil;
+//    NSDictionary *dict = @{ @"someKey" : @"stringVal", @"nullKey" : [NSNull null]};
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+//    id jsonObj = [NSJSONSerialization JSONObjectWithData:postData options:NSJSONReadingMutableContainers error:&error];
+//    NSLog(@"%@", jsonObj);
 }
 
 - (void)tearDown {
