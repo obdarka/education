@@ -1,29 +1,15 @@
 //
-//  DKNull.m
+//  DKPrivateNull.m
 //  DKKit
 //
-//  Created by Daria on 14.01.16.
+//  Created by Daria Kovalenko on 1/18/16.
 //  Copyright © 2016 Daria. All rights reserved.
 //
 
-#import "DKNull.h"
 #import "DKPrivateNull.h"
-static DKPrivateNull *dkNullObject;
 
-@implementation DKNull
+@implementation DKPrivateNull
 
-+ (instancetype)null {    
-    [self initNull];
-    return (id)dkNullObject;
-}
-
-+ (void)initNull {
-    static dispatch_once_t predicate;
-    dispatch_once( &predicate, ^{
-        dkNullObject = [[DKPrivateNull alloc] init];
-    } );
-}
-/*
 - (void)forwardInvocation:(NSInvocation *)anInvocation {
     if ([[NSNull null] respondsToSelector:
          [anInvocation selector]])
@@ -34,10 +20,18 @@ static DKPrivateNull *dkNullObject;
     }
 }
 
+- (BOOL)isKindOfClass:(Class)aClass {
+    if ([aClass isSubclassOfClass:[NSNull class]]) {
+        return YES;
+    } else {
+        return [super isKindOfClass:aClass];
+    }
+}
+
 - (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
     NSMethodSignature* signature = [super methodSignatureForSelector:selector];
     if (!signature) {
-        signature = [DKNull instanceMethodSignatureForSelector:@selector(fakeMethod)];
+        signature = [DKPrivateNull instanceMethodSignatureForSelector:@selector(fakeMethod)];
     }
     return signature;
 }
@@ -62,5 +56,5 @@ static DKPrivateNull *dkNullObject;
 - (NSUInteger)hash {
     return [NSNull null].hash;
 }
- */
+
 @end
