@@ -18,8 +18,8 @@
 
 - (void)setUp {
     [super setUp];
-//    nullObject = [NSNull null];
-    self.nullObject = [DKNull new];
+    self.nullObject = [NSNull null];
+//    self.nullObject = [DKNull new];
 //    NSError *error = nil;
 //    NSDictionary *dict = @{ @"someKey" : @"stringVal", @"nullKey" : [NSNull null]};
 //    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];

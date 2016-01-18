@@ -22,7 +22,7 @@ static DKNull *__nullObject;
 + (id)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t predicate;
     dispatch_once( &predicate, ^{
-        __nullObject = (id)[NSNull allocWithZone:zone];
+        __nullObject = (id)[NSObject allocWithZone:zone];
         Class objClass = object_getClass(__nullObject);
         if (![objClass isSubclassOfClass:[DKNull class]]) {
             object_setClass(__nullObject, [DKNull class]);
