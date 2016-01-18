@@ -10,12 +10,16 @@
 
 static DKNull *dkNullObject;
 
-@implementation DKNull
+@interface DKNull ()
 
 + (instancetype)null {    
     [self initNull];
     return dkNullObject;
 }
+- (void)fakeMethod;
+
+@end
+@implementation DKNull
 
 + (void)initNull {
     static dispatch_once_t predicate;
@@ -25,13 +29,8 @@ static DKNull *dkNullObject;
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {
-    if ([[NSNull null] respondsToSelector:
-         [anInvocation selector]])
-        [anInvocation invokeWithTarget:[NSNull null]];
-    else {
-        anInvocation.target = nil;
-        [anInvocation invoke];
-    }
+    anInvocation.target = nil;
+    [anInvocation invoke];
 }
 
 - (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
@@ -47,19 +46,14 @@ static DKNull *dkNullObject;
 }
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
-    return self;
+    return nil;
 }
 
 - (BOOL)isEqual:(id)object {
-    if(!object)
-        return YES;
-    else if ([object isEqual:[NSNull null]])
-        return YES;
-    else
-        return [super isEqual:object];
+    return [super isEqual:object] || (!object) || ([object isEqual:[NSNull null]]);
 }
 
 - (NSUInteger)hash {
-    return [NSNull null].hash;
+    return (NSInteger)self;
 }
 @end
