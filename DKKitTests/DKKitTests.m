@@ -8,9 +8,9 @@
 
 #import <XCTest/XCTest.h>
 #import "DKNull.h"
-@interface DKKitTests : XCTestCase {
-    id nullObject;
-}
+@interface DKKitTests : XCTestCase
+
+@property (strong, nonatomic) id nullObject;
 
 @end
 
@@ -18,8 +18,8 @@
 
 - (void)setUp {
     [super setUp];
-    nullObject = [NSNull null];
-//    nullObject = [DKNull new];
+//    nullObject = [NSNull null];
+    self.nullObject = [DKNull new];
 //    NSError *error = nil;
 //    NSDictionary *dict = @{ @"someKey" : @"stringVal", @"nullKey" : [NSNull null]};
 //    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
@@ -32,48 +32,48 @@
 }
 
 - (void)test_sendUnknownMessage {
-    XCTAssertNoThrow([nullObject loadView]);
+    XCTAssertNoThrow([self.nullObject loadView]);
 }
 
 - (void)test_sendMessageWithNil {
-    XCTAssertNoThrow([nullObject view]);
-    XCTAssertNil([nullObject view]);
+    XCTAssertNoThrow([self.nullObject view]);
+    XCTAssertNil([self.nullObject view]);
 }
 
 - (void)test_sendMessageWithPrimitive {
-    XCTAssertNoThrow([nullObject count]);
-    XCTAssertEqual([nullObject count], 0);
+    XCTAssertNoThrow([self.nullObject count]);
+    XCTAssertEqual([self.nullObject count], 0);
 }
 
 - (void)test_structReturnMessage {
-    XCTAssertNoThrow([nullObject frame]);
-    XCTAssertTrue(CGRectIsEmpty([nullObject frame]));
+    XCTAssertNoThrow([self.nullObject frame]);
+    XCTAssertTrue(CGRectIsEmpty([self.nullObject frame]));
 }
 
 - (void)test_sendNullMethods {
-    XCTAssertNoThrow([nullObject class]);
-    XCTAssertNoThrow([nullObject description]);
+    XCTAssertNoThrow([self.nullObject class]);
+    XCTAssertNoThrow([self.nullObject description]);
 }
 
 - (void)test_beEqualToNSNull {
-    XCTAssertNoThrow([nullObject isEqual:[NSNull null]]);
-    XCTAssertTrue([nullObject isEqual:[NSNull null]]);
+    XCTAssertNoThrow([self.nullObject isEqual:[NSNull null]]);
+    XCTAssertTrue([self.nullObject isEqual:[NSNull null]]);
 }
 
 - (void)test_compareWithNil {
-    XCTAssertTrue([nullObject isEqual:nil]);
+    XCTAssertTrue([self.nullObject isEqual:nil]);
 }
 
 - (void)test_compareWithSelf {
-    XCTAssertTrue([nullObject isEqual:nullObject]);
+    XCTAssertTrue([self.nullObject isEqual:self.nullObject]);
 }
 
 - (void)test_compareWithOtherObject {
-    XCTAssertFalse([nullObject isEqual:[NSObject new]]);
+    XCTAssertFalse([self.nullObject isEqual:[NSObject new]]);
 }
 
 - (void)test_hashForTwoObjects {
-    XCTAssertTrue([nullObject hash] == [[NSNull null] hash]);
+    XCTAssertTrue([self.nullObject hash] == [[NSNull null] hash]);
 }
 
 @end
