@@ -7,25 +7,28 @@
 //
 
 #import "DKNull.h"
+#import <objc/runtime.h>
 
-static DKNull *dkNullObject;
+static DKNull *__nullObject;
 
 @interface DKNull ()
 
-+ (instancetype)null {    
-    [self initNull];
-    return dkNullObject;
-}
 - (void)fakeMethod;
 
 @end
+
 @implementation DKNull
 
-+ (void)initNull {
++ (id)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t predicate;
     dispatch_once( &predicate, ^{
-        dkNullObject = [[DKNull alloc] init];
-    } );
+        __nullObject = (id)[NSNull allocWithZone:zone];
+        Class objClass = object_getClass(__nullObject);
+        if (![objClass isSubclassOfClass:[DKNull class]]) {
+            object_setClass(__nullObject, [DKNull class]);
+        }
+    });
+    return __nullObject;
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {
