@@ -16,6 +16,7 @@ typedef id(*DKNullReturnIMP)(id, SEL, id);
 @implementation NSNull (DKNull)
 
 + (void)load {
+    [DKNull new];
     [self replaceAllocMethod];
     [self replaceNullMethod];
 }
