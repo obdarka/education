@@ -18,7 +18,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.nullObject = [NSNull null];
+    self.nullObject = [NSNull new];
 //    self.nullObject = [DKNull new];
 //    NSError *error = nil;
 //    NSDictionary *dict = @{ @"someKey" : @"stringVal", @"nullKey" : [NSNull null]};
