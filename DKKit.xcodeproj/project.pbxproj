@@ -14,6 +14,7 @@
 		C85552A21C484BE5009FD76D /* DKNull.m in Sources */ = {isa = PBXBuildFile; fileRef = C85552A01C484BE5009FD76D /* DKNull.m */; };
 		C8E8D37B1C4C5BDF00FFE0AF /* NSNull+DKNull.h in Headers */ = {isa = PBXBuildFile; fileRef = C8E8D3791C4C5BDF00FFE0AF /* NSNull+DKNull.h */; };
 		C8E8D37C1C4C5BDF00FFE0AF /* NSNull+DKNull.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E8D37A1C4C5BDF00FFE0AF /* NSNull+DKNull.m */; };
+		C8E8D3921C502B7E00FFE0AF /* NSNullTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E8D3911C502B7E00FFE0AF /* NSNullTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		C85552A01C484BE5009FD76D /* DKNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKNull.m; sourceTree = "<group>"; };
 		C8E8D3791C4C5BDF00FFE0AF /* NSNull+DKNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DKNull.h"; sourceTree = "<group>"; };
 		C8E8D37A1C4C5BDF00FFE0AF /* NSNull+DKNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DKNull.m"; sourceTree = "<group>"; };
+		C8E8D3911C502B7E00FFE0AF /* NSNullTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNullTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
