@@ -15,6 +15,8 @@
 		C8E8D37B1C4C5BDF00FFE0AF /* NSNull+DKNull.h in Headers */ = {isa = PBXBuildFile; fileRef = C8E8D3791C4C5BDF00FFE0AF /* NSNull+DKNull.h */; };
 		C8E8D37C1C4C5BDF00FFE0AF /* NSNull+DKNull.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E8D37A1C4C5BDF00FFE0AF /* NSNull+DKNull.m */; };
 		C8E8D3921C502B7E00FFE0AF /* NSNullTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E8D3911C502B7E00FFE0AF /* NSNullTests.m */; };
+		C8E8D3961C5033D100FFE0AF /* NSObject+DKSubclasses.h in Headers */ = {isa = PBXBuildFile; fileRef = C8E8D3941C5033D100FFE0AF /* NSObject+DKSubclasses.h */; };
+		C8E8D3971C5033D100FFE0AF /* NSObject+DKSubclasses.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E8D3951C5033D100FFE0AF /* NSObject+DKSubclasses.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,8 @@
 		C8E8D3791C4C5BDF00FFE0AF /* NSNull+DKNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DKNull.h"; sourceTree = "<group>"; };
 		C8E8D37A1C4C5BDF00FFE0AF /* NSNull+DKNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DKNull.m"; sourceTree = "<group>"; };
 		C8E8D3911C502B7E00FFE0AF /* NSNullTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNullTests.m; sourceTree = "<group>"; };
+		C8E8D3941C5033D100FFE0AF /* NSObject+DKSubclasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DKSubclasses.h"; sourceTree = "<group>"; };
+		C8E8D3951C5033D100FFE0AF /* NSObject+DKSubclasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DKSubclasses.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				C855528C1C48451C009FD76D /* DKKitTests.m */,
+				C8E8D3911C502B7E00FFE0AF /* NSNullTests.m */,
 				C855528E1C48451C009FD76D /* Info.plist */,
 			);
 			path = DKKitTests;
@@ -101,6 +106,7 @@
 		C855529B1C4845A8009FD76D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				C8E8D3931C5033B800FFE0AF /* NSObject+DKSubclasses */,
 				C855529C1C4845A8009FD76D /* NSNull+DKNull */,
 			);
 			path = Categories;
@@ -132,6 +138,15 @@
 			path = DKNull;
 			sourceTree = "<group>";
 		};
+		C8E8D3931C5033B800FFE0AF /* NSObject+DKSubclasses */ = {
+			isa = PBXGroup;
+			children = (
+				C8E8D3941C5033D100FFE0AF /* NSObject+DKSubclasses.h */,
+				C8E8D3951C5033D100FFE0AF /* NSObject+DKSubclasses.m */,
+			);
+			path = "NSObject+DKSubclasses";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -142,6 +157,7 @@
 				C8E8D37B1C4C5BDF00FFE0AF /* NSNull+DKNull.h in Headers */,
 				C85552A11C484BE5009FD76D /* DKNull.h in Headers */,
 				C85552811C48451C009FD76D /* DKKit.h in Headers */,
+				C8E8D3961C5033D100FFE0AF /* NSObject+DKSubclasses.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8E8D3971C5033D100FFE0AF /* NSObject+DKSubclasses.m in Sources */,
 				C85552A21C484BE5009FD76D /* DKNull.m in Sources */,
 				C8E8D37C1C4C5BDF00FFE0AF /* NSNull+DKNull.m in Sources */,
 			);
@@ -251,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C855528D1C48451C009FD76D /* DKKitTests.m in Sources */,
+				C8E8D3921C502B7E00FFE0AF /* NSNullTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
