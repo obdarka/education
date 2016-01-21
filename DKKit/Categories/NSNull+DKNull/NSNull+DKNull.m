@@ -19,19 +19,23 @@ static IMP originNullIMP = nil;
 @implementation NSNull (DKNull)
 
 + (void)load {
-    originAllocIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(allocWithZone:)));
-    originNullIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(null)));
-//    [DKNull new];
+//    originAllocIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(allocWithZone:)));
+//    originNullIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(null)));
+    [DKNull new];
 //    [self replaceAllocMethod];
 //    [self replaceNullMethod];
 }
 
 + (void)injectDKNull {
+    [self replaceAllocMethod];
+    [self replaceNullMethod];
 //    [self replaceAllocMethod];
 //    [self replaceNullMethod];
 }
 
 + (void)removeDKNull {
+    id nullObject = [NSNull null];
+    object_setClass(nullObject, [NSNull class]);
     [self removeAllocInject];
     [self removeNullInject];
 }
