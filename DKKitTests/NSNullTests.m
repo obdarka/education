@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "NSNull+DKNull.h"
 #import "DKNull.h"
-//#import "NSObject+DKSubclasses.h"
+#import "NSObject+DKSubclasses.h"
 
 @interface NSNullTests : XCTestCase
 
@@ -19,8 +19,8 @@
 
 - (void)setUp {
     [super setUp];
-//    NSArray *subclasses = [NSObject allSubclasses];
-//    NSLog(@"%@", subclasses);
+    NSArray *subclasses = [NSObject allSubclasses];
+    NSLog(@"%@", subclasses);
     [NSNull injectDKNull];
 }
 
