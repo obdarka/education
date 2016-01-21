@@ -18,13 +18,14 @@
     for (int i = 0; i < outCount; i++) {
         Class currentClass = list[i];
         
-        Class superClass = class_getSuperclass(currentClass);
-        while (superClass && superClass != [NSObject class]) {
+        Class superClass = currentClass;
+        do {
             superClass = class_getSuperclass(superClass);
-        }
+        } while (superClass && superClass != [NSObject class]);
         
-        if (superClass == [NSObject class])
+        if (class_conformsToProtocol(superClass, @protocol(NSObject))) {
             [classNames addObject:NSStringFromClass(currentClass)];
+        }
     }
     free(list);
     
