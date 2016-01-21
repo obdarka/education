@@ -26,6 +26,8 @@
         if (superClass == [NSObject class])
             [classNames addObject:NSStringFromClass(currentClass)];
     }
+    free(list);
+    
     return [classNames copy];
 }
 
