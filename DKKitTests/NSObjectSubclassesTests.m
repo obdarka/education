@@ -9,6 +9,13 @@
 #import <XCTest/XCTest.h>
 #import "NSObject+DKSubclasses.h"
 #import "DKNull.h"
+
+@interface DKNullSubclass : DKNull
+@end
+
+@implementation DKNullSubclass
+@end
+
 @interface NSObjectSubclassesTests : XCTestCase
 
 @end
@@ -24,9 +31,9 @@
 }
 
 - (void)test_containsDKNull {
-    NSArray *classNames = [NSObject allSubclasses];
-    XCTAssertTrue([classNames containsObject:NSStringFromClass([DKNull class])]);
+    NSArray *subclasses = [NSNull subclasses];
+    NSSet *expectedSet = [NSSet setWithArray:@[[DKNull class], [DKNullSubclass class]]];
+    XCTAssertEqualObjects([NSSet setWithArray:subclasses], expectedSet);
 }
-
 
 @end
