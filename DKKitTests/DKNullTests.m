@@ -8,23 +8,17 @@
 
 #import <XCTest/XCTest.h>
 #import "DKNull.h"
-@interface DKKitTests : XCTestCase
+@interface DKNullTests : XCTestCase
 
 @property (strong, nonatomic) id nullObject;
 
 @end
 
-@implementation DKKitTests
+@implementation DKNullTests
 
 - (void)setUp {
     [super setUp];
-    self.nullObject = [NSNull null];
-//    self.nullObject = [DKNull new];
-//    NSError *error = nil;
-//    NSDictionary *dict = @{ @"someKey" : @"stringVal", @"nullKey" : [NSNull null]};
-//    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
-//    id jsonObj = [NSJSONSerialization JSONObjectWithData:postData options:NSJSONReadingMutableContainers error:&error];
-//    NSLog(@"%@", jsonObj);
+    self.nullObject = [DKNull new];
 }
 
 - (void)tearDown {

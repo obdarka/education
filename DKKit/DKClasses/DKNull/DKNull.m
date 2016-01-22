@@ -9,7 +9,7 @@
 #import "DKNull.h"
 #import <objc/runtime.h>
 
-static DKNull *__nullObject = nil;
+static id __nullObject = nil;
 
 @interface DKNull ()
 
@@ -22,7 +22,7 @@ static DKNull *__nullObject = nil;
 + (id)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t predicate;
     dispatch_once( &predicate, ^{
-        __nullObject = (id)[NSNull allocWithZone:zone];
+        __nullObject = [NSNull allocWithZone:zone];
         Class objClass = object_getClass(__nullObject);
         if (![objClass isSubclassOfClass:[DKNull class]]) {
             object_setClass(__nullObject, [DKNull class]);
@@ -39,7 +39,7 @@ static DKNull *__nullObject = nil;
 - (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
     NSMethodSignature* signature = [super methodSignatureForSelector:selector];
     if (!signature) {
-        signature = [DKNull instanceMethodSignatureForSelector:@selector(fakeMethod)];
+        signature = [[self class] instanceMethodSignatureForSelector:@selector(fakeMethod)];
     }
     return signature;
 }
