@@ -11,25 +11,24 @@
 
 @implementation NSObject (DKSubclasses)
 
-+ (NSArray *)allSubclasses {
++ (NSArray *)subclasses {
     unsigned int outCount;
-    NSMutableArray *classNames = [NSMutableArray array];
+    NSMutableArray *classes = [NSMutableArray array];
     Class *list = objc_copyClassList(&outCount);
     for (int i = 0; i < outCount; i++) {
-        Class currentClass = list[i];
-        
-        Class superClass = currentClass;
+        Class class = list[i];
+        Class superclass = class;
         do {
-            superClass = class_getSuperclass(superClass);
-        } while (superClass && superClass != [NSObject class]);
+            superclass = class_getSuperclass(superclass);
+        } while (superclass && superclass != [NSObject class]);
         
-        if (class_conformsToProtocol(superClass, @protocol(NSObject))) {
-            [classNames addObject:NSStringFromClass(currentClass)];
+        if (class_conformsToProtocol(superclass, @protocol(NSObject)) && class != self && [class isSubclassOfClass:self]) {
+            [classes addObject:class];
         }
     }
     free(list);
     
-    return [classNames copy];
+    return [classes copy];
 }
 
 @end

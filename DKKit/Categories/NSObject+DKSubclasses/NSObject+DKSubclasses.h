@@ -10,6 +10,6 @@
 
 @interface NSObject (DKSubclasses)
 
-+ (NSArray *)allSubclasses;
++ (NSArray *)subclasses;
 
 @end
