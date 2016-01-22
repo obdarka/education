@@ -9,6 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSNull (DKNull)
-+ (void)injectDKNull;
-+ (void)removeDKNull;
+
 @end

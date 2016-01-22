@@ -19,9 +19,27 @@ static IMP originNullIMP = nil;
 @implementation NSNull (DKNull)
 
 + (void)load {
+    SEL selector = @selector(allocWithZone:);
+    id object = [NSNull class];
+    
+    Class class = object_getClass(object);
+    if (class_isMetaClass(class)) {
+        NSLog(@"Is that metaclass");
+    }
+    
+    IMP implementation = [class instanceMethodForSelector:selector];
+    id block = ^(id object, NSZone *zone) {
+        NSLog(@"alloc with zone block called");
+        return ((id(*)(id, SEL, NSZone *))implementation)(object, selector, zone);
+    };
+    IMP blockImp = imp_implementationWithBlock(block);
+    Method method = class_getInstanceMethod(class, selector);
+    class_replaceMethod(class, selector, blockImp, method_getTypeEncoding(method));
+    
+    
 //    originAllocIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(allocWithZone:)));
 //    originNullIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(null)));
-    [DKNull new];
+//    [DKNull new];
 //    [self replaceAllocMethod];
 //    [self replaceNullMethod];
 }
@@ -34,8 +52,8 @@ static IMP originNullIMP = nil;
 }
 
 + (void)removeDKNull {
-    id nullObject = [NSNull null];
-    object_setClass(nullObject, [NSNull class]);
+//    id nullObject = [NSNull null];
+//    object_setClass(nullObject, [NSNull class]);
     [self removeAllocInject];
     [self removeNullInject];
 }

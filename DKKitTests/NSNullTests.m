@@ -10,6 +10,13 @@
 #import "NSNull+DKNull.h"
 #import "DKNull.h"
 
+#import "NSObject+IDPRuntime.h"
+
+@interface NSNull ()
++ (void)injectDKNull;
++ (void)removeDKNull;
+@end
+
 @interface NSNullTests : XCTestCase
 
 @end
@@ -18,12 +25,12 @@
 
 - (void)setUp {
     [super setUp];
-    [NSNull injectDKNull];
+//    [NSNull injectDKNull];
 }
 
 - (void)tearDown {
     [super tearDown];
-    [NSNull removeDKNull];
+//    [NSNull removeDKNull];
 }
 
 - (void)prepareDataWithTestBlock:(void(^)(id nullObject))testBlock {
