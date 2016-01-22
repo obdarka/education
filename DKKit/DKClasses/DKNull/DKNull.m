@@ -8,6 +8,7 @@
 
 #import "DKNull.h"
 #import <objc/runtime.h>
+#import "NSMethodSignature+IDPNilPrivate.h"
 
 static id __nullObject = nil;
 
@@ -31,25 +32,26 @@ static id __nullObject = nil;
     return __nullObject;
 }
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation {
-    anInvocation.target = nil;
-    [anInvocation invoke];
+- (void)forwardInvocation:(NSInvocation *)invocation {
+    if (invocation.methodSignature.nilForwarded) {
+        invocation.target = nil;
+        [invocation invoke];
+    } else {
+        [super forwardInvocation:invocation];
+    }
 }
 
-- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
-    NSMethodSignature* signature = [super methodSignatureForSelector:selector];
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
+    NSMethodSignature *signature = [super methodSignatureForSelector:selector];
     if (!signature) {
         signature = [[self class] instanceMethodSignatureForSelector:@selector(fakeMethod)];
+        signature.nilForwarded = YES;
     }
     return signature;
 }
 
 - (void)fakeMethod {
     
-}
-
-- (id)forwardingTargetForSelector:(SEL)aSelector {
-    return nil;
 }
 
 - (BOOL)isEqual:(id)object {

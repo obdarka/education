@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4237379A1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 423737961C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h */; };
+		4237379B1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 423737971C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m */; };
+		4237379C1C523EBB008DD670 /* NSObject+IDPRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 423737981C523EBB008DD670 /* NSObject+IDPRuntime.h */; };
+		4237379D1C523EBB008DD670 /* NSObject+IDPRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 423737991C523EBB008DD670 /* NSObject+IDPRuntime.m */; };
 		427DC8BD1C512C8C00740DA7 /* NSObjectSubclassesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 427DC8BC1C512C8C00740DA7 /* NSObjectSubclassesTests.m */; };
 		C85552811C48451C009FD76D /* DKKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C85552801C48451C009FD76D /* DKKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C85552881C48451C009FD76D /* DKKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C855527D1C48451C009FD76D /* DKKit.framework */; };
@@ -31,6 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		423737961C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMethodSignature+IDPNilPrivate.h"; sourceTree = "<group>"; };
+		423737971C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+IDPNilPrivate.m"; sourceTree = "<group>"; };
+		423737981C523EBB008DD670 /* NSObject+IDPRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+IDPRuntime.h"; sourceTree = "<group>"; };
+		423737991C523EBB008DD670 /* NSObject+IDPRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+IDPRuntime.m"; sourceTree = "<group>"; };
 		427DC8BC1C512C8C00740DA7 /* NSObjectSubclassesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectSubclassesTests.m; sourceTree = "<group>"; };
 		C855527D1C48451C009FD76D /* DKKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DKKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C85552801C48451C009FD76D /* DKKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DKKit.h; sourceTree = "<group>"; };
@@ -66,6 +74,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		423737951C523EBB008DD670 /* IDAPCategories */ = {
+			isa = PBXGroup;
+			children = (
+				423737961C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h */,
+				423737971C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m */,
+				423737981C523EBB008DD670 /* NSObject+IDPRuntime.h */,
+				423737991C523EBB008DD670 /* NSObject+IDPRuntime.m */,
+			);
+			path = IDAPCategories;
+			sourceTree = "<group>";
+		};
 		C85552731C48451C009FD76D = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				C85552801C48451C009FD76D /* DKKit.h */,
+				423737951C523EBB008DD670 /* IDAPCategories */,
 				C855529B1C4845A8009FD76D /* Categories */,
 				C855529D1C4845A8009FD76D /* DKClasses */,
 				C85552821C48451C009FD76D /* Info.plist */,
@@ -158,9 +178,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8E8D37B1C4C5BDF00FFE0AF /* NSNull+DKNull.h in Headers */,
+				4237379C1C523EBB008DD670 /* NSObject+IDPRuntime.h in Headers */,
 				C85552A11C484BE5009FD76D /* DKNull.h in Headers */,
 				C85552811C48451C009FD76D /* DKKit.h in Headers */,
 				C8E8D3961C5033D100FFE0AF /* NSObject+DKSubclasses.h in Headers */,
+				4237379A1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +284,9 @@
 			files = (
 				C8E8D3971C5033D100FFE0AF /* NSObject+DKSubclasses.m in Sources */,
 				C85552A21C484BE5009FD76D /* DKNull.m in Sources */,
+				4237379B1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m in Sources */,
 				C8E8D37C1C4C5BDF00FFE0AF /* NSNull+DKNull.m in Sources */,
+				4237379D1C523EBB008DD670 /* NSObject+IDPRuntime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
