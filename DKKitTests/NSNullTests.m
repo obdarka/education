@@ -19,6 +19,9 @@
 
 @end
 
+static IMP originNullImplementation = nil;
+static IMP originAllocImplementation = nil;
+
 @interface NSNullTests : XCTestCase
 @property (strong, nonatomic) NSData *testData;
 @end
@@ -38,30 +41,38 @@
     __block NSInteger counter = 0;
     XCTestExpectation *nullExpectation = [self expectationWithDescription:@"Null called"];
     SEL nullSel = @selector(null);
+    originNullImplementation = [[NSNull class] instanceMethodForSelector:nullSel];
     [self replaceSelector:nullSel withCallBlock:^{
         if (counter == 0) {
             [nullExpectation fulfill];
         }
         counter +=1;
+        NSLog(@"%ld", (long)counter);
     }];
     
     NSError *error = nil;
     [NSJSONSerialization JSONObjectWithData:self.testData options:NSJSONReadingMutableContainers error:&error];
     
-    [self waitForExpectationsWithTimeout:0.1 handler:nil];
+    [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+        [self removeInjectionForSelector:nullSel withOriginImplementation:originNullImplementation];
+    }];
 }
 
 - (void)test_callAllocImplementation {
     [self prepareTestData];
+    
     XCTestExpectation *expectation = [self expectationWithDescription:@"Alloc with zone called"];
     SEL allocWithZoneSel = @selector(allocWithZone:);
+    originAllocImplementation = [[NSNull class] instanceMethodForSelector:allocWithZoneSel];
     [self replaceSelector:allocWithZoneSel withCallBlock:^{
         [expectation fulfill];
     }];
 
     [NSNull new];
     
-    [self waitForExpectationsWithTimeout:0.1 handler:nil];
+    [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+        [self removeInjectionForSelector:allocWithZoneSel withOriginImplementation:originAllocImplementation];
+    }];
 }
 
 
@@ -71,9 +82,10 @@
     NSDictionary *dict = @{ @"nullKey" : [NSNull null]};
     self.testData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
 }
+
 - (void)replaceSelector:(SEL)selector withCallBlock:(void (^)(void))callBlock {
     id object = [NSNull class];
-    Method method = class_getInstanceMethod([NSNull class], selector);
+    Method method = class_getInstanceMethod(object, selector);
     Class class = object_getClass(object);
     IMP implementation = [class instanceMethodForSelector:selector];
     id block = ^(id object, NSZone *zone) {
@@ -84,6 +96,11 @@
     };
     IMP blockImp = imp_implementationWithBlock(block);
     class_replaceMethod(class, selector, blockImp, method_getTypeEncoding(method));
+}
+
+- (void)removeInjectionForSelector:(SEL)selector withOriginImplementation:(IMP)originImplementation {
+    Method method = class_getInstanceMethod([NSNull class], selector);
+    class_replaceMethod([NSNull class], selector, originImplementation, method_getTypeEncoding(method));
 }
 
 @end
