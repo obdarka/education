@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "NSObject+DKSubclasses.h"
 #import "DKNull.h"
+#import <objc/runtime.h>
 
 @interface DKNullSubclass : DKNull
 @end
@@ -17,7 +18,6 @@
 @end
 
 @interface NSObjectSubclassesTests : XCTestCase
-
 @end
 
 @implementation NSObjectSubclassesTests
@@ -36,6 +36,18 @@
     XCTAssertEqualObjects([NSSet setWithArray:subclasses], expectedSet);
 }
 
-- (void)test_createClasses
+- (void)test_withCreationSubclass {
+    Class firstClass = objc_allocateClassPair([DKNullSubclass class], "DKFirstClass", 0);
+    objc_registerClassPair(firstClass);
+    
+    NSArray *subclasses = [NSNull subclasses];
+//    NSSet *expectedSet = [NSSet setWithArray:@[[DKNull class], [DKNullSubclass class], firstClass]];
+//    XCTAssertEqualObjects([NSSet setWithArray:subclasses], expectedSet);
+//    expectedSet = nil;
+    XCTAssertTrue([subclasses containsObject:firstClass]);
+    subclasses = nil;
+    
+    objc_disposeClassPair(firstClass);
+}
 
 @end
