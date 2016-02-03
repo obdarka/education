@@ -36,4 +36,6 @@
     XCTAssertEqualObjects([NSSet setWithArray:subclasses], expectedSet);
 }
 
+- (void)test_createClasses
+
 @end

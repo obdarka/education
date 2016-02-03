@@ -8,10 +8,9 @@
 
 #import <XCTest/XCTest.h>
 #import "DKNull.h"
+
 @interface DKNullTests : XCTestCase
-
 @property (strong, nonatomic) id nullObject;
-
 @end
 
 @implementation DKNullTests

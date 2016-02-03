@@ -88,4 +88,5 @@ static IMP originNullIMP = nil;
     class_replaceMethod([NSNull class], selector, replaceImplementation, method_getTypeEncoding(replaceMethod));
     method_setImplementation(originalMethod, replaceImplementation);
 }
+
 @end
