@@ -35,10 +35,14 @@
 
 - (void)test_callNullImplementation {
     [self prepareTestData];
+    __block NSInteger counter = 0;
     XCTestExpectation *nullExpectation = [self expectationWithDescription:@"Null called"];
     SEL nullSel = @selector(null);
     [self replaceSelector:nullSel withCallBlock:^{
-        [nullExpectation fulfill];
+        if (counter == 0) {
+            [nullExpectation fulfill];
+        }
+        counter +=1;
     }];
     
     NSError *error = nil;
