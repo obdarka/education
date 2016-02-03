@@ -41,11 +41,13 @@
     objc_registerClassPair(firstClass);
     
     NSArray *subclasses = [NSNull subclasses];
-//    NSSet *expectedSet = [NSSet setWithArray:@[[DKNull class], [DKNullSubclass class], firstClass]];
-//    XCTAssertEqualObjects([NSSet setWithArray:subclasses], expectedSet);
-//    expectedSet = nil;
-    XCTAssertTrue([subclasses containsObject:firstClass]);
+    NSSet *subclassesSet = [NSSet setWithArray:subclasses];
+    NSSet *expectedSet = [NSSet setWithArray:@[[DKNull class], [DKNullSubclass class], firstClass]];
+    
+    XCTAssertEqualObjects(subclassesSet, expectedSet);
+    expectedSet = nil;
     subclasses = nil;
+    subclassesSet = nil;
     
     objc_disposeClassPair(firstClass);
 }
