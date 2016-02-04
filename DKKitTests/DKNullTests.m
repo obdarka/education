@@ -8,6 +8,14 @@
 
 #import <XCTest/XCTest.h>
 #import "DKNull.h"
+#import "NSNull+DKNull.h"
+
+@interface NSNull ()
+
++ (void)injectDKNull;
++ (void)removeDKNull;
+
+@end
 
 @interface DKNullTests : XCTestCase
 @property (strong, nonatomic) id nullObject;
@@ -17,10 +25,12 @@
 
 - (void)setUp {
     [super setUp];
-    self.nullObject = [DKNull new];
+    [NSNull injectDKNull];
+    self.nullObject = [NSNull new];
 }
 
 - (void)tearDown {
+    [NSNull removeDKNull];
     [super tearDown];
 }
 

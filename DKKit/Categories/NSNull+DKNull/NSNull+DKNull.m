@@ -13,42 +13,45 @@
 typedef id(^DKBlockWithIMP)(IMP implementation);
 typedef id(*DKNullReturnIMP)(id, SEL, id);
 
-static IMP originAllocIMP = nil;
-static IMP originNullIMP = nil;
+static IMP DKNullOriginAllocIMP = nil;
+static IMP DKNullOriginNullIMP = nil;
 
 @implementation NSNull (DKNull)
 
 + (void)load {
-    originAllocIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(allocWithZone:)));
-    originNullIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(null)));
+    DKNullOriginAllocIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(allocWithZone:)));
+    DKNullOriginNullIMP = method_getImplementation(class_getClassMethod([NSNull class], @selector(null)));
 }
 
 + (void)injectDKNull {
     [self replaceAllocMethod];
     [self replaceNullMethod];
-//    [self replaceAllocMethod];
-//    [self replaceNullMethod];
 }
 
 + (void)removeDKNull {
-//    id nullObject = [NSNull null];
-//    object_setClass(nullObject, [NSNull class]);
     [self removeAllocInject];
     [self removeNullInject];
 }
 
 + (void)removeNullInject {
-    [self replaceSelector:@selector(null) withOriginImplementation:originNullIMP];
+    [self replaceWithOriginIMP:DKNullOriginNullIMP forSelector:@selector(null)];
 }
 
 + (void)removeAllocInject {
-    [self replaceSelector:@selector(allocWithZone:) withOriginImplementation:originAllocIMP];
+     [self replaceWithOriginIMP:DKNullOriginAllocIMP forSelector:@selector(allocWithZone:)];
 }
 
 + (void)replaceSelector:(SEL)selector withOriginImplementation:(IMP)implementation {
     Method methodToReplace = class_getClassMethod([NSNull class], selector);
     class_replaceMethod([NSNull class], selector, implementation, method_getTypeEncoding(methodToReplace));
     method_setImplementation(methodToReplace, implementation);
+}
+
++ (void)replaceWithOriginIMP:(IMP)originImplementation forSelector:(SEL)selector {
+    id object = [NSNull class];
+    Class class = object_getClass(object);
+    Method method = class_getInstanceMethod(class, selector);
+    class_replaceMethod(class, selector, originImplementation, method_getTypeEncoding(method));
 }
 
 + (void)replaceAllocMethod {
