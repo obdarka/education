@@ -32,6 +32,13 @@ static id __nullObject = nil;
     return __nullObject;
 }
 
++ (instancetype)null {
+    if (!__nullObject) {
+        [DKNull new];
+    }
+    return __nullObject;
+}
+
 - (void)forwardInvocation:(NSInvocation *)invocation {
     if (invocation.methodSignature.nilForwarded) {
         invocation.target = nil;
