@@ -13,9 +13,22 @@
 
 static IMP DKAllocWithZoneOriginIMP = nil;
 static IMP DKNullOriginIMP = nil;
+static IMP DKNewOriginIMP = nil;
 
 @interface NSNullTests : XCTestCase
-@property (strong, nonatomic) NSData *testData;
+@property (nonatomic, strong) NSData *testData;
+@property (nonatomic, strong) NSDictionary *testDictionary;
+
+- (void)prepareTestData;
+
+- (void)replaceAllocWithZoneMethodWithCallBlock:(void (^)(void))callBlock;
+- (void)replaceNullMethodWithCallBlock:(void (^)(void))callBlock;
+- (void)replaceNewMethodWithCallBlock:(void (^)(void))callBlock;
+
+- (void)replaceAllocWithOriginImplementation;
+- (void)replaceNullWithOriginImplementation;
+- (void)replaceWithOriginIMP:(IMP)originImplementation forSelector:(SEL)selector;
+
 @end
 
 @implementation NSNullTests
@@ -30,42 +43,43 @@ static IMP DKNullOriginIMP = nil;
 
 - (void)test_callNullImplementation {
     [self prepareTestData];
-    XCTestExpectation *nullExpectation = [self expectationWithDescription:@"Null called"];
+    NSMutableArray *selectorsCall = [NSMutableArray array];
+    
     [self replaceNullMethodWithCallBlock:^{
-            [nullExpectation fulfill];
+        [selectorsCall addObject:@"null"];
     }];
     
-    NSError *error = nil;
-    [NSJSONSerialization JSONObjectWithData:self.testData options:NSJSONReadingMutableContainers error:&error];
-    
-    [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
-        [self replaceNullWithOriginImplementation];
+    [self replaceAllocWithZoneMethodWithCallBlock:^{
+        [selectorsCall addObject:@"allocWithZone"];
     }];
+    
+    [self replaceNewMethodWithCallBlock:^{
+        [selectorsCall addObject:@"new"];
+    }];
+    
+    id serializationObject = [NSJSONSerialization JSONObjectWithData:self.testData options:NSJSONReadingMutableContainers error:nil];
+    
+    XCTAssertEqualObjects(serializationObject, self.testDictionary);
+    XCTAssertEqualObjects(selectorsCall, @[@"null"]);
+    
+    [self replaceNullWithOriginImplementation];
+    [self replaceAllocWithOriginImplementation];
+    [self replaceNewWithOriginImplementation];
+    
 }
 
-- (void)test_callAllocImplementation {
-    [self prepareTestData];
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Alloc with zone called"];
-    [self replaceAllocMethodWithCallBlock:^{
-        [expectation fulfill];
-    }];
-
-    [NSNull new];
-    
-    [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
-        [self replaceAllocWithOriginImplementation];
-    }];
-}
-
-
-#pragma mark - Methods
+#pragma mark -
+#pragma mark Methods
 - (void)prepareTestData {
     NSError *error = nil;
-    NSDictionary *dict = @{ @"nullKey" : [NSNull null]};
-    self.testData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    self.testDictionary = @{ @"nullKey" : [NSNull null]};
+    self.testData = [NSJSONSerialization dataWithJSONObject:self.testDictionary options:NSJSONWritingPrettyPrinted error:&error];
 }
 
-- (void)replaceAllocMethodWithCallBlock:(void (^)(void))callBlock {
+
+#pragma mark -
+#pragma mark Replacements
+- (void)replaceAllocWithZoneMethodWithCallBlock:(void (^)(void))callBlock {
     SEL selector = @selector(allocWithZone:);
     id object = [NSNull class];
     
@@ -87,21 +101,6 @@ static IMP DKNullOriginIMP = nil;
     IMP blockImp = imp_implementationWithBlock(block);
     Method method = class_getInstanceMethod(class, selector);
     class_replaceMethod(class, selector, blockImp, method_getTypeEncoding(method));
-}
-
-- (void)replaceAllocWithOriginImplementation {
-    [self replaceWithOriginIMP:DKAllocWithZoneOriginIMP forSelector:@selector(allocWithZone:)];
-}
-
-- (void)replaceNullWithOriginImplementation {
-    [self replaceWithOriginIMP:DKNullOriginIMP forSelector:@selector(null)];
-}
-
-- (void)replaceWithOriginIMP:(IMP)originImplementation forSelector:(SEL)selector {
-    id object = [NSNull class];
-    Class class = object_getClass(object);
-    Method method = class_getInstanceMethod(class, selector);
-    class_replaceMethod(class, selector, originImplementation, method_getTypeEncoding(method));
 }
 
 - (void)replaceNullMethodWithCallBlock:(void (^)(void))callBlock {
@@ -137,6 +136,7 @@ static IMP DKNullOriginIMP = nil;
     }
     
     IMP implementation = [class instanceMethodForSelector:selector];
+    DKNewOriginIMP = implementation;
     id block = ^(id object) {
         NSLog(@"new block called");
         if (callBlock) {
@@ -147,6 +147,27 @@ static IMP DKNullOriginIMP = nil;
     IMP blockImp = imp_implementationWithBlock(block);
     Method method = class_getInstanceMethod(class, selector);
     class_replaceMethod(class, selector, blockImp, method_getTypeEncoding(method));
+}
+
+#pragma mark -
+#pragma mark Replace with origin implementations
+- (void)replaceAllocWithOriginImplementation {
+    [self replaceWithOriginIMP:DKAllocWithZoneOriginIMP forSelector:@selector(allocWithZone:)];
+}
+
+- (void)replaceNullWithOriginImplementation {
+    [self replaceWithOriginIMP:DKNullOriginIMP forSelector:@selector(null)];
+}
+
+- (void)replaceNewWithOriginImplementation {
+    [self replaceWithOriginIMP:DKNewOriginIMP forSelector:@selector(new)];
+}
+
+- (void)replaceWithOriginIMP:(IMP)originImplementation forSelector:(SEL)selector {
+    id object = [NSNull class];
+    Class class = object_getClass(object);
+    Method method = class_getInstanceMethod(class, selector);
+    class_replaceMethod(class, selector, originImplementation, method_getTypeEncoding(method));
 }
 
 @end
