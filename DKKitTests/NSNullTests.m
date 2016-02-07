@@ -7,13 +7,19 @@
 //
 
 #import <XCTest/XCTest.h>
-//#import "NSNull+DKNull.h"
-//#import "DKNull.h"
+#import "NSNull+DKNull.h"
+#import "DKNull.h"
 #import "NSObject+IDPRuntime.h"
 
 static IMP DKAllocWithZoneOriginIMP = nil;
 static IMP DKNullOriginIMP = nil;
 static IMP DKNewOriginIMP = nil;
+
+@interface NSNull ()
+
++ (void)injectDKNull;
+
+@end
 
 @interface NSNullTests : XCTestCase
 @property (nonatomic, strong) NSData *testData;
@@ -43,6 +49,7 @@ static IMP DKNewOriginIMP = nil;
 
 - (void)test_callNullImplementation {
     [self prepareTestData];
+    [NSNull injectDKNull];
     NSMutableArray *selectorsCall = [NSMutableArray array];
     
     [self replaceNullMethodWithCallBlock:^{
@@ -61,6 +68,10 @@ static IMP DKNewOriginIMP = nil;
     
     XCTAssertEqualObjects(serializationObject, self.testDictionary);
     XCTAssertEqualObjects(selectorsCall, @[@"null"]);
+    
+    id nullObject = serializationObject[@"nullKey"];
+    XCTAssertTrue([nullObject isMemberOfClass:[NSNull class]]);
+    XCTAssertTrue([nullObject isMemberOfClass:[DKNull class]]);
     
     [self replaceNullWithOriginImplementation];
     [self replaceAllocWithOriginImplementation];

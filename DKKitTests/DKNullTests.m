@@ -26,7 +26,7 @@
 - (void)setUp {
     [super setUp];
     [NSNull injectDKNull];
-    self.nullObject = [NSNull new];
+    self.nullObject = [NSNull null];
 }
 
 - (void)tearDown {
@@ -77,6 +77,11 @@
 
 - (void)test_hashForTwoObjects {
     XCTAssertTrue([self.nullObject hash] == [[NSNull null] hash]);
+}
+
+- (void)test_isMemberOfClass {
+    XCTAssertTrue([self.nullObject isMemberOfClass:[DKNull class]]);
+    XCTAssertTrue([self.nullObject isMemberOfClass:[NSNull class]]);
 }
 
 @end
