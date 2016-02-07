@@ -37,5 +37,7 @@
     return createdClass;
 }
 
-
++ (void)removeClass {
+    objc_disposeClassPair(self);
+}
 @end

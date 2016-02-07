@@ -13,5 +13,5 @@
 + (NSArray *)subclasses;
 
 + (Class)subclassWithName:(NSString *)name;
-
++ (void)removeClass;
 @end
