@@ -31,4 +31,11 @@
     return [classes copy];
 }
 
++ (Class)subclassWithName:(NSString *)name {
+    Class createdClass = objc_allocateClassPair(self, [name UTF8String], 0);
+    objc_registerClassPair(createdClass);
+    return createdClass;
+}
+
+
 @end

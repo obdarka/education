@@ -12,4 +12,6 @@
 
 + (NSArray *)subclasses;
 
++ (Class)subclassWithName:(NSString *)name;
+
 @end

@@ -37,8 +37,7 @@
 }
 
 - (void)test_withCreationSubclass {
-    Class firstClass = objc_allocateClassPair([DKNullSubclass class], "DKFirstClass", 0);
-    objc_registerClassPair(firstClass);
+    Class firstClass = [DKNullSubclass subclassWithName:@"DKFirstClass"];
     
     NSArray *subclasses = [NSNull subclasses];
     NSSet *subclassesSet = [NSSet setWithArray:subclasses];
@@ -49,7 +48,7 @@
     subclasses = nil;
     subclassesSet = nil;
     
-    objc_disposeClassPair(firstClass);
+//    objc_disposeClassPair(firstClass);
 }
 
 @end
