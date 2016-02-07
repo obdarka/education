@@ -61,4 +61,9 @@ static id __nullObject = nil;
 - (NSUInteger)hash {
     return (NSInteger)self;
 }
+
+- (BOOL)isMemberOfClass:(Class)aClass {
+    return aClass == [NSNull class] || aClass == [DKNull class];
+}
+
 @end
