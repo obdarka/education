@@ -24,7 +24,6 @@ static IMP DKNullOriginNullIMP = nil;
 }
 
 + (void)injectDKNull {
-    [self replaceAllocMethod];
     [self replaceNullMethod];
 }
 
@@ -41,12 +40,6 @@ static IMP DKNullOriginNullIMP = nil;
      [self replaceWithOriginIMP:DKNullOriginAllocIMP forSelector:@selector(allocWithZone:)];
 }
 
-+ (void)replaceSelector:(SEL)selector withOriginImplementation:(IMP)implementation {
-    Method methodToReplace = class_getClassMethod([NSNull class], selector);
-    class_replaceMethod([NSNull class], selector, implementation, method_getTypeEncoding(methodToReplace));
-    method_setImplementation(methodToReplace, implementation);
-}
-
 + (void)replaceWithOriginIMP:(IMP)originImplementation forSelector:(SEL)selector {
     id object = [NSNull class];
     Class class = object_getClass(object);
@@ -61,6 +54,7 @@ static IMP DKNullOriginNullIMP = nil;
 + (void)replaceNullMethod {
     [self replaceSelector:@selector(null) withClass:[DKNull class]];
 }
+
 
 + (void)replaceSelector:(SEL)selector withClass:(Class)class {
     Method originalMethod = class_getClassMethod([NSNull class], selector);
