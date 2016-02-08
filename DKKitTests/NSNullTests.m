@@ -49,7 +49,6 @@ static IMP DKNewOriginIMP = nil;
 
 - (void)test_callNullImplementation {
     [self prepareTestData];
-    [NSNull injectDKNull];
     NSMutableArray *selectorsCall = [NSMutableArray array];
     
     [self replaceNullMethodWithCallBlock:^{
@@ -71,7 +70,6 @@ static IMP DKNewOriginIMP = nil;
     
     id nullObject = serializationObject[@"nullKey"];
     XCTAssertTrue([nullObject isMemberOfClass:[NSNull class]]);
-    XCTAssertTrue([nullObject isMemberOfClass:[DKNull class]]);
     
     [self replaceNullWithOriginImplementation];
     [self replaceAllocWithOriginImplementation];
