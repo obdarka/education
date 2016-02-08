@@ -84,4 +84,10 @@
     XCTAssertTrue([self.nullObject isMemberOfClass:[NSNull class]]);
 }
 
+- (void)test_removeImp {
+    [NSNull removeDKNull];
+    id nullObject = [NSNull null];
+    XCTAssertTrue([nullObject isMemberOfClass:[NSNull class]]);
+    XCTAssertFalse([nullObject isMemberOfClass:[DKNull class]]);
+}
 @end
