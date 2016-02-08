@@ -11,7 +11,7 @@
 #import "DKNull.h"
 #import <objc/runtime.h>
 
-@interface DKNullSubclass : DKNull
+@interface DKNullSubclass : NSNull
 @end
 
 @implementation DKNullSubclass
@@ -32,7 +32,7 @@
 
 - (void)test_containsDKNull {
     NSArray *subclasses = [NSNull subclasses];
-    NSSet *expectedSet = [NSSet setWithArray:@[[DKNull class], [DKNullSubclass class]]];
+    NSSet *expectedSet = [NSSet setWithArray:@[[DKNullSubclass class]]];
     XCTAssertEqualObjects([NSSet setWithArray:subclasses], expectedSet);
 }
 
@@ -41,14 +41,15 @@
     
     NSArray *subclasses = [NSNull subclasses];
     NSSet *subclassesSet = [NSSet setWithArray:subclasses];
-    NSSet *expectedSet = [NSSet setWithArray:@[[DKNull class], [DKNullSubclass class], firstClass]];
+    NSSet *expectedSet = [NSSet setWithArray:@[[DKNullSubclass class], firstClass]];
     
     XCTAssertEqualObjects(subclassesSet, expectedSet);
     expectedSet = nil;
     subclasses = nil;
     subclassesSet = nil;
     
-//    [firstClass removeClass];
+//    objc_disposeClassPair(firstClass);
+    [firstClass removeClass];
 }
 
 @end
