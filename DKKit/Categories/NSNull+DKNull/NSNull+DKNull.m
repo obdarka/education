@@ -28,7 +28,6 @@ static IMP DKNullOriginNullIMP = nil;
 }
 
 + (void)removeDKNull {
-    [self removeAllocInject];
     [self removeNullInject];
 }
 
