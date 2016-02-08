@@ -18,6 +18,7 @@ static IMP DKNewOriginIMP = nil;
 @interface NSNull ()
 
 + (void)injectDKNull;
++ (void)removeDKNull;
 
 @end
 
@@ -75,6 +76,23 @@ static IMP DKNewOriginIMP = nil;
     [self replaceAllocWithOriginImplementation];
     [self replaceNewWithOriginImplementation];
     
+}
+
+- (void)test_dkNullInject {
+    [self prepareTestData];
+    [NSNull injectDKNull];
+    
+    id serializationObject = [NSJSONSerialization JSONObjectWithData:self.testData options:NSJSONReadingMutableContainers error:nil];
+    id nullObject = serializationObject[@"nullKey"];
+    XCTAssertTrue([nullObject isMemberOfClass:[NSNull class]]);
+    XCTAssertTrue([nullObject isMemberOfClass:[DKNull class]]);
+    
+    [NSNull removeDKNull];
+    
+    id secondSerialization = [NSJSONSerialization JSONObjectWithData:self.testData options:NSJSONReadingMutableContainers error:nil];
+    id noninjectNullObject = secondSerialization[@"nullKey"];
+    XCTAssertTrue([noninjectNullObject isMemberOfClass:[NSNull class]]);
+    XCTAssertFalse([noninjectNullObject isMemberOfClass:[DKNull class]]);
 }
 
 #pragma mark -
