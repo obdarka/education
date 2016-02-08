@@ -24,10 +24,12 @@ static IMP DKNullOriginNullIMP = nil;
 }
 
 + (void)injectDKNull {
+    [self replaceAllocMethod];
     [self replaceNullMethod];
 }
 
 + (void)removeDKNull {
+    [self removeAllocInject];
     [self removeNullInject];
 }
 
