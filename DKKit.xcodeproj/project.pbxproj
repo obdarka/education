@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421AF6B01C6A36AA0087BF6D /* HYTimerLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 421AF6AC1C6A36AA0087BF6D /* HYTimerLabel.h */; };
+		421AF6B11C6A36AA0087BF6D /* HYTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 421AF6AD1C6A36AA0087BF6D /* HYTimerLabel.m */; };
+		421AF6B21C6A36AA0087BF6D /* HYTimerModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 421AF6AE1C6A36AA0087BF6D /* HYTimerModel.h */; };
+		421AF6B31C6A36AA0087BF6D /* HYTimerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 421AF6AF1C6A36AA0087BF6D /* HYTimerModel.m */; };
 		4237379A1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 423737961C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h */; };
 		4237379B1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 423737971C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m */; };
 		4237379C1C523EBB008DD670 /* NSObject+IDPRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 423737981C523EBB008DD670 /* NSObject+IDPRuntime.h */; };
@@ -35,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		421AF6AC1C6A36AA0087BF6D /* HYTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTimerLabel.h; sourceTree = "<group>"; };
+		421AF6AD1C6A36AA0087BF6D /* HYTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTimerLabel.m; sourceTree = "<group>"; };
+		421AF6AE1C6A36AA0087BF6D /* HYTimerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTimerModel.h; sourceTree = "<group>"; };
+		421AF6AF1C6A36AA0087BF6D /* HYTimerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTimerModel.m; sourceTree = "<group>"; };
 		423737961C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMethodSignature+IDPNilPrivate.h"; sourceTree = "<group>"; };
 		423737971C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+IDPNilPrivate.m"; sourceTree = "<group>"; };
 		423737981C523EBB008DD670 /* NSObject+IDPRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+IDPRuntime.h"; sourceTree = "<group>"; };
@@ -74,6 +82,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		421AF6AA1C6A36AA0087BF6D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				421AF6AB1C6A36AA0087BF6D /* HYTimerView */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		421AF6AB1C6A36AA0087BF6D /* HYTimerView */ = {
+			isa = PBXGroup;
+			children = (
+				421AF6AC1C6A36AA0087BF6D /* HYTimerLabel.h */,
+				421AF6AD1C6A36AA0087BF6D /* HYTimerLabel.m */,
+				421AF6AE1C6A36AA0087BF6D /* HYTimerModel.h */,
+				421AF6AF1C6A36AA0087BF6D /* HYTimerModel.m */,
+			);
+			path = HYTimerView;
+			sourceTree = "<group>";
+		};
 		423737951C523EBB008DD670 /* IDAPCategories */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +118,7 @@
 				C855527F1C48451C009FD76D /* DKKit */,
 				C855528B1C48451C009FD76D /* DKKitTests */,
 				C855527E1C48451C009FD76D /* Products */,
+				421AF6AA1C6A36AA0087BF6D /* Source */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,9 +208,11 @@
 				C8E8D37B1C4C5BDF00FFE0AF /* NSNull+DKNull.h in Headers */,
 				4237379C1C523EBB008DD670 /* NSObject+IDPRuntime.h in Headers */,
 				C85552A11C484BE5009FD76D /* DKNull.h in Headers */,
+				421AF6B01C6A36AA0087BF6D /* HYTimerLabel.h in Headers */,
 				C85552811C48451C009FD76D /* DKKit.h in Headers */,
 				C8E8D3961C5033D100FFE0AF /* NSObject+DKSubclasses.h in Headers */,
 				4237379A1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.h in Headers */,
+				421AF6B21C6A36AA0087BF6D /* HYTimerModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,10 +313,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8E8D3971C5033D100FFE0AF /* NSObject+DKSubclasses.m in Sources */,
+				421AF6B31C6A36AA0087BF6D /* HYTimerModel.m in Sources */,
 				C85552A21C484BE5009FD76D /* DKNull.m in Sources */,
 				4237379B1C523EBB008DD670 /* NSMethodSignature+IDPNilPrivate.m in Sources */,
 				C8E8D37C1C4C5BDF00FFE0AF /* NSNull+DKNull.m in Sources */,
 				4237379D1C523EBB008DD670 /* NSObject+IDPRuntime.m in Sources */,
+				421AF6B11C6A36AA0087BF6D /* HYTimerLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
