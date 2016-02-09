@@ -41,8 +41,8 @@
     subclasses = nil;
     subclassesSet = nil;
     
-//    objc_disposeClassPair(firstClass);
     [firstClass removeClass];
+    [secondClass removeClass];
 }
 
 @end
