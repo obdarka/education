@@ -66,7 +66,8 @@ static id __nullObject = nil;
 }
 
 - (NSUInteger)hash {
-    return (NSInteger)self;
+//    return (NSInteger)self;
+    return [(NSNull *)kCFNull hash];
 }
 
 - (BOOL)isMemberOfClass:(Class)aClass {
